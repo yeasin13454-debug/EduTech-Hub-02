@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTech Hub - Courses & Software Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col justify-between transition-colors duration-300">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="text-2xl font-extrabold bg-gradient-to-r from-indigo-600 via-violet-600 to-blue-500 bg-clip-text text-transparent">EduTech Hub</span>
+            </div>
+            
+            <!-- Navigation Links with Software and Courses Dropdowns (Desktop) -->
+            <nav class="hidden md:flex space-x-6 font-medium items-center">
+                <a href="#" onclick="filterSelection('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition">Home</a>
+                
+                <!-- Courses Dropdown Menu (Hoverable) -->
+                <div class="relative group py-2">
+                    <button class="text-slate-600 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition flex items-center space-x-1">
+                        <span>Courses</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <!-- Courses Dropdown list -->
+                    <div class="absolute left-0 mt-2 w-56 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl shadow-2xl py-2 hidden group-hover:block transition-all z-50">
+                        <a href="#items-section" onclick="filterSelection('course')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-graduation-cap mr-2 text-indigo-500"></i> All Courses</a>
+                        <a href="#items-section" onclick="filterSelection('Web Development')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-code mr-2 text-blue-500"></i> Web Development</a>
+                        <a href="#items-section" onclick="filterSelection('UI/UX Design')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-paint-brush mr-2 text-pink-500"></i> UI/UX Design</a>
+                        <a href="#items-section" onclick="filterSelection('Data Science')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-chart-line mr-2 text-green-500"></i> Data Science</a>
+                        <a href="#items-section" onclick="filterSelection('Cyber Security')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-shield-halved mr-2 text-amber-500"></i> Cyber Security</a>
+                    </div>
+                </div>
+
+                <!-- Software Dropdown Menu with Windows, Android, Apple, Mac, Linux & Games -->
+                <div class="relative group py-2">
+                    <button class="text-slate-600 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition flex items-center space-x-1">
+                        <span>Software</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <!-- Software Dropdown list -->
+                    <div class="absolute left-0 mt-2 w-56 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl shadow-2xl py-2 hidden group-hover:block transition-all z-50">
+                        <a href="#items-section" onclick="filterSelection('software')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-box mr-2 text-indigo-500"></i> All Softwares</a>
+                        <a href="#items-section" onclick="filterSelection('Windows')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-brands fa-windows mr-2 text-blue-500"></i> Windows</a>
+                        <a href="#items-section" onclick="filterSelection('Android')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-brands fa-android mr-2 text-green-500"></i> Android</a>
+                        <a href="#items-section" onclick="filterSelection('Apple')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-brands fa-apple mr-2 text-slate-800 dark:text-slate-200"></i> Apple</a>
+                        <a href="#items-section" onclick="filterSelection('Mac')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-laptop mr-2 text-indigo-500"></i> Mac</a>
+                        <a href="#items-section" onclick="filterSelection('Linux')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-brands fa-linux mr-2 text-amber-600"></i> Linux</a>
+                        <a href="#items-section" onclick="filterSelection('Games')" class="block px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:text-indigo-600"><i class="fa-solid fa-gamepad mr-2 text-purple-500"></i> Games</a>
+                    </div>
+                </div>
+
+                <!-- Freelancing Menu Item -->
+                <div class="relative group py-2">
+                    <button onclick="filterSelection('Freelancing')" class="text-slate-600 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition flex items-center space-x-1 cursor-pointer">
+                        <span>Freelancing</span>
+                    </button>
+                </div>
+
+                <!-- Government Services Menu Item -->
+                <div class="relative group py-2">
+                    <button onclick="filterSelection('Govt Services')" class="text-slate-600 dark:text-slate-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition flex items-center space-x-1 cursor-pointer">
+                        <span>Government Services</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- User Auth Controls, Dark Mode & Mobile Menu Button -->
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-yellow-400 hover:scale-105 transition shadow-sm cursor-pointer" title="Toggle Dark/Light Mode">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+
+                <div id="userInfo" class="hidden text-sm font-semibold text-slate-700 dark:text-slate-200 md:flex items-center space-x-2 cursor-pointer hover:text-indigo-600" onclick="openProfileModal()" title="Open Profile & Settings">
+                    <i class="fa-solid fa-user-circle text-indigo-600 text-lg"></i>
+                    <span id="userNameDisplay">User</span>
+                </div>
+                <button id="authBtn" onclick="openAuthModal('login')" class="px-5 py-2.5 rounded-xl border border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 font-semibold hover:bg-indigo-50 dark:hover:bg-slate-800 transition shadow-sm text-sm">Login</button>
+                <button id="logoutBtn" onclick="logoutUser()" class="hidden px-4 py-2 rounded-xl bg-red-50 text-red-600 font-semibold hover:bg-red-100 transition text-sm">Logout</button>
+
+                <!-- Mobile Menu / 3-Dot Toggle Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-xl bg-indigo-50 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg shadow-sm cursor-pointer">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-6 py-4 space-y-4 shadow-xl transition-all">
+            <a href="#" onclick="filterSelection('all'); toggleMobileMenu();" class="block text-slate-700 dark:text-slate-200 font-medium py-1"><i class="fa-solid fa-house mr-2 text-indigo-500"></i> Home</a>
+            
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-3">
+                <p class="text-xs font-bold text-slate-400 uppercase mb-2">Courses Category</p>
+                <div class="grid grid-cols-2 gap-2 pl-2">
+                    <a href="#items-section" onclick="filterSelection('course'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-graduation-cap mr-1 text-indigo-500"></i> All Courses</a>
+                    <a href="#items-section" onclick="filterSelection('Web Development'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-code mr-1 text-blue-500"></i> Web Dev</a>
+                    <a href="#items-section" onclick="filterSelection('UI/UX Design'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-paint-brush mr-1 text-pink-500"></i> UI/UX</a>
+                    <a href="#items-section" onclick="filterSelection('Data Science'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-chart-line mr-1 text-green-500"></i> Data Science</a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-3">
+                <p class="text-xs font-bold text-slate-400 uppercase mb-2">Software Operating Systems & Games</p>
+                <div class="grid grid-cols-2 gap-2 pl-2">
+                    <a href="#items-section" onclick="filterSelection('software'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-box mr-1 text-indigo-500"></i> All Software</a>
+                    <a href="#items-section" onclick="filterSelection('Windows'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-brands fa-windows mr-1 text-blue-500"></i> Windows</a>
+                    <a href="#items-section" onclick="filterSelection('Android'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-brands fa-android mr-1 text-green-500"></i> Android</a>
+                    <a href="#items-section" onclick="filterSelection('Apple'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-brands fa-apple mr-1 text-slate-800 dark:text-slate-200"></i> Apple</a>
+                    <a href="#items-section" onclick="filterSelection('Mac'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-laptop mr-1 text-indigo-500"></i> Mac</a>
+                    <a href="#items-section" onclick="filterSelection('Linux'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-brands fa-linux mr-1 text-amber-600"></i> Linux</a>
+                    <a href="#items-section" onclick="filterSelection('Games'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-gamepad mr-1 text-purple-500"></i> Games</a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-3">
+                <p class="text-xs font-bold text-slate-400 uppercase mb-2">Other Services</p>
+                <div class="grid grid-cols-2 gap-2 pl-2">
+                    <a href="#items-section" onclick="filterSelection('Freelancing'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-briefcase mr-1 text-indigo-500"></i> Freelancing</a>
+                    <a href="#items-section" onclick="filterSelection('Govt Services'); toggleMobileMenu();" class="text-sm text-slate-600 dark:text-slate-300 py-1"><i class="fa-solid fa-landmark mr-1 text-emerald-500"></i> Govt Services</a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-3 flex items-center justify-between">
+                <button onclick="openProfileModal(); toggleMobileMenu();" id="mobileProfileBtn" class="hidden text-indigo-600 dark:text-indigo-400 font-semibold"><i class="fa-solid fa-user-gear mr-1"></i> My Profile & Upload</button>
+                <button onclick="openAuthModal('login'); toggleMobileMenu();" id="mobileAuthBtn" class="px-4 py-1.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Animated Background Image Slider -->
+    <section class="relative bg-gradient-to-br from-indigo-900 via-slate-900 to-violet-950 text-white py-24 px-4 text-center overflow-hidden shadow-2xl">
+        <!-- Carousel Background Images -->
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80')"></div>
+        
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px]"></div>
+
+        <div class="max-w-4xl mx-auto space-y-6 relative z-10">
+            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 backdrop-blur-md">
+                <i class="fa-solid fa-sparkles mr-2"></i> Ultimate Digital Resource Hub
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight bg-gradient-to-r from-white via-indigo-100 to-indigo-300 bg-clip-text text-transparent">Master Skills with Top Courses & Softwares</h1>
+            <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto font-light">Discover professional programming courses, design masterclasses, and essential operating system softwares all in one place.</p>
+            
+            <!-- Search Bar -->
+            <div class="mt-8 max-w-xl mx-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl border border-white/20 flex items-center">
+                <i class="fa-solid fa-search text-slate-400 ml-3 text-lg"></i>
+                <input type="text" id="searchInput" onkeyup="searchItems()" placeholder="Search courses or softwares..." class="w-full px-4 py-2 text-slate-800 dark:text-slate-100 focus:outline-none bg-transparent placeholder-slate-400">
+                <button class="bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition shadow-lg shadow-indigo-600/35">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section in Rows (As requested) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <h2 class="text-3xl font-black text-slate-800 dark:text-slate-100 mb-3">Our Core Services & Categories</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">Browse courses, operating system software, freelancing guides, and international government services.</p>
+        </div>
+
+        <!-- Dynamic E-Commerce Rows Container -->
+        <div id="items-section" class="scroll-mt-28"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+            <h3 id="currentCategoryTitle" class="text-xl font-black text-slate-800 dark:text-slate-100 mb-6">E-Commerce Category Showcase</h3>
+        </div>
+        <div id="ecommerceRowsContainer" class="space-y-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Rendered dynamically by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Multi-Step Registration & Login Modal -->
+    <div id="authModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-md w-full shadow-2xl relative border border-slate-100 dark:border-slate-800">
+            <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            
+            <!-- Tabs Switcher -->
+            <div class="flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl mb-6">
+                <button id="loginTabBtn" onclick="switchAuthMode('login')" class="flex-1 py-2.5 rounded-xl text-sm font-bold transition bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm">Login</button>
+                <button id="registerTabBtn" onclick="switchAuthMode('register')" class="flex-1 py-2.5 rounded-xl text-sm font-bold transition text-slate-500 dark:text-slate-400">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Welcome Back</h3>
+                    <p class="text-xs text-slate-500">Sign in to your EduTech Hub account</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Email or Mobile</label>
+                    <input type="text" id="loginEmail" required placeholder="name@example.com or 017..." class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-indigo-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-indigo-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-600/30 text-sm">Login Now</button>
+            </form>
+
+            <!-- Multi-Step Registration Form -->
+            <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Create Account</h3>
+                    <p class="text-xs text-slate-500">Step <span id="regStepNum">1</span> of 2: <span id="regStepTitle">Personal Info</span></p>
+                </div>
+
+                <!-- Step 1: Name & Mobile -->
+                <div id="regStep1" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Full Name</label>
+                        <input type="text" id="regName" placeholder="e.g. Rahim Ahmed" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-indigo-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Mobile Number</label>
+                        <div class="flex space-x-2">
+                            <!-- Country Code Selector with Flag -->
+                            <div class="relative w-2/5">
+                                <button type="button" onclick="toggleCountryDropdown('reg')" class="w-full px-3 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm flex items-center justify-between focus:outline-none focus:border-indigo-600">
+                                    <span class="flex items-center space-x-2 truncate">
+                                        <img id="regSelectedFlag" src="https://flagcdn.com/w40/bd.png" alt="Flag" class="w-5 h-3.5 object-cover rounded-xs shrink-0">
+                                        <span id="regSelectedCode" class="font-medium">+880</span>
+                                    </span>
+                                    <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
+                                </button>
+                                <div id="regCountryDropdown" class="hidden absolute left-0 mt-1 w-64 max-h-60 overflow-y-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl z-50">
+                                    <div class="p-2 sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
+                                        <input type="text" onkeyup="filterCountryList('reg', this.value)" placeholder="Search country or code..." class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none">
+                                    </div>
+                                    <div id="regCountryList" class="divide-y divide-slate-100 dark:divide-slate-700/50"></div>
+                                </div>
+                            </div>
+                            <input type="tel" id="regMobile" placeholder="1712345678" class="w-3/5 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-indigo-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                        </div>
+                    </div>
+                    <button type="button" onclick="nextRegStep()" class="w-full py-3.5 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-600/30 text-sm flex items-center justify-center space-x-2">
+                        <span>Next</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Step 2: Email, Password & Submit -->
+                <div id="regStep2" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Email Address</label>
+                        <input type="email" id="regEmail" placeholder="rahim@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-indigo-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Password</label>
+                        <input type="password" id="regPassword" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-indigo-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                    </div>
+                    <div class="flex space-x-3">
+                        <button type="button" onclick="prevRegStep()" class="w-1/3 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold rounded-xl hover:bg-slate-200 transition text-sm">Back</button>
+                        <button type="submit" class="w-2/3 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-xl hover:opacity-90 transition shadow-lg shadow-emerald-600/30 text-sm">Submit & Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile & Settings Modal -->
+    <div id="profileModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative border border-slate-100 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProfileModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex items-center space-x-4 mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-indigo-600 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-indigo-600/30">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div>
+                    <h3 id="profileNameDisplay" class="text-xl font-bold text-slate-800 dark:text-slate-100">User Name</h3>
+                    <p id="profileEmailDisplay" class="text-sm text-slate-500">user@example.com</p>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl mb-6">
+                <button id="profileTabSettings" onclick="switchProfileTab('settings')" class="flex-1 py-2 rounded-xl text-xs font-bold transition bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm">Account Settings</button>
+                <button id="profileTabUpload" onclick="switchProfileTab('upload')" class="flex-1 py-2 rounded-xl text-xs font-bold transition text-slate-500 dark:text-slate-400">Upload Software/Course</button>
+            </div>
+
+            <!-- Settings Content -->
+            <div id="profileSettingsSection" class="space-y-6">
+                <form onsubmit="updateProfileSettings(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Update Name</label>
+                        <input type="text" id="settingsName" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Update Mobile Number</label>
+                        <div class="flex space-x-2">
+                            <!-- Country Code Selector with Flag for Profile Settings -->
+                            <div class="relative w-2/5">
+                                <button type="button" onclick="toggleCountryDropdown('settings')" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm flex items-center justify-between focus:outline-none focus:border-indigo-600">
+                                    <span class="flex items-center space-x-2 truncate">
+                                        <img id="settingsSelectedFlag" src="https://flagcdn.com/w40/bd.png" alt="Flag" class="w-5 h-3.5 object-cover rounded-xs shrink-0">
+                                        <span id="settingsSelectedCode" class="font-medium">+880</span>
+                                    </span>
+                                    <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
+                                </button>
+                                <div id="settingsCountryDropdown" class="hidden absolute left-0 mt-1 w-64 max-h-60 overflow-y-auto bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl z-50">
+                                    <div class="p-2 sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
+                                        <input type="text" onkeyup="filterCountryList('settings', this.value)" placeholder="Search country or code..." class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none">
+                                    </div>
+                                    <div id="settingsCountryList" class="divide-y divide-slate-100 dark:divide-slate-700/50"></div>
+                                </div>
+                            </div>
+                            <input type="tel" id="settingsMobile" class="w-3/5 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition text-sm">Save Settings</button>
+                </form>
+
+                <div class="border-t border-slate-100 dark:border-slate-800 pt-4">
+                    <button onclick="logoutUser(); closeProfileModal();" class="w-full py-2.5 bg-red-50 text-red-600 font-semibold rounded-xl hover:bg-red-100 transition text-sm">Logout Account</button>
+                </div>
+            </div>
+
+            <!-- Upload Content inside Profile -->
+            <div id="profileUploadSection" class="space-y-4 hidden">
+                <form id="newItemForm" onsubmit="handleUpload(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Item Category</label>
+                        <select id="itemType" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                            <option value="Windows">Windows Software</option>
+                            <option value="Android">Android Software</option>
+                            <option value="Apple">Apple Software</option>
+                            <option value="Mac">Mac Software</option>
+                            <option value="Linux">Linux Software</option>
+                            <option value="Games">Games</option>
+                            <option value="Web Development">Web Development Course</option>
+                            <option value="UI/UX Design">UI/UX Design Course</option>
+                            <option value="Data Science">Data Science Course</option>
+                            <option value="Cyber Security">Cyber Security Course</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Item Title</label>
+                            <input type="text" id="itemTitle" required placeholder="e.g. Pro Game X" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Pricing Type</label>
+                            <select id="itemPricing" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                                <option value="Free">Free</option>
+                                <option value="Paid">Paid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Description</label>
+                        <textarea id="itemDesc" required rows="2" placeholder="Write description..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Meta Details (Size/Lectures)</label>
+                            <input type="text" id="itemMeta" required placeholder="Size: 100 MB" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Select Icon</label>
+                            <select id="itemIcon" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm">
+                                <option value="fa-gamepad">Game Icon</option>
+                                <option value="fa-code">Code Icon</option>
+                                <option value="fa-laptop-code">Software Icon</option>
+                                <option value="fa-paint-brush">Design Icon</option>
+                                <option value="fa-brands fa-windows">Windows</option>
+                                <option value="fa-brands fa-android">Android</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition text-sm shadow-lg shadow-emerald-600/30">Publish & Upload Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- General Success Modal -->
+    <div id="actionModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-md w-full shadow-2xl text-center border border-slate-100 dark:border-slate-800">
+            <div id="modalIcon" class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 id="modalTitle" class="text-xl font-bold mb-2 text-slate-800 dark:text-slate-100">Success!</h3>
+            <p id="modalDesc" class="text-slate-600 dark:text-slate-400 mb-6">Your action was completed successfully.</p>
+            <button onclick="closeModal()" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition">OK</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-100 py-12 mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="text-xl font-bold">EduTech Hub</span>
+                </div>
+                <p class="text-slate-400 text-sm">Your reliable destination for skill development courses and professional software downloads.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-white">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-slate-400">
+                    <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4 text-white">Contact Support</h4>
+                <p class="text-sm text-slate-400 mb-2"><i class="fa-solid fa-envelope mr-2"></i> support@edutechhub.com</p>
+                <p class="text-sm text-slate-400"><i class="fa-solid fa-phone mr-2"></i> +1 (555) 234-5678</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 pt-6 text-center text-sm text-slate-500">
+            &copy; 2026 EduTech Hub. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+        <script src="script.js" defer></script>
+
+</body>
+</html>
